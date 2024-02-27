@@ -1,0 +1,20 @@
+# Base image with Go environment
+FROM golang:1.13-alpine
+
+# Set working directory
+WORKDIR /home/app
+
+# Copying Go source code
+COPY . .
+
+# Installing dependencies using go mod
+RUN go mod download
+
+# Building the Go application
+RUN go build -o main .
+
+# Exposing the port my Go app listens to
+EXPOSE 4040
+
+# Command to run the application
+CMD ["go", "run", "main.go"]

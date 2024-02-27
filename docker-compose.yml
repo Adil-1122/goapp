@@ -1,0 +1,19 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+  app:
+    build: 
+      context: .
+    depends_on:
+      - mysql
+    ports:
+      - "4040:4040"
+    env_file:
+      - .env
